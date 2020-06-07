@@ -469,9 +469,11 @@ setup(void)
 	swa.background_pixel = scheme[SchemeSlider][ColBg].pixel;
 	swa.event_mask = ExposureMask | KeyPressMask | ButtonPressMask | ButtonReleaseMask |
 	                 Button1MotionMask | VisibilityChangeMask;
-	win = XCreateWindow(dpy, parentwin, x, y, sw, sh, 0,
+	win = XCreateWindow(dpy, parentwin, x, y, sw, sh, border_width,
 	                    CopyFromParent, CopyFromParent, CopyFromParent,
 	                    CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);
+	XSetWindowBorder(dpy, win, scheme[SchemePrompt][ColBg].pixel);
+
 	XSetClassHint(dpy, win, &ch);
 
 	/* input methods */

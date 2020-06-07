@@ -6,6 +6,9 @@ static int centered = 1;            /* centrered by default */
                  /* TODO: Add cmd lie option for centering. */
 static int width = 600;             /*  width when centered */
 
+/* Size of the window border */
+static const unsigned int border_width = 3;
+
 static int min              = 0;    /* -l:  lower bound */
 static int max              = 100;  /* -u:  upper bound */
 static int initval          = 0;    /* -x:  initial value */
