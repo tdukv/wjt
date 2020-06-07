@@ -430,9 +430,15 @@ setup(void)
 				if (INTERSECT(x, y, 1, 1, info[i]))
 					break;
 
-		x = info[i].x_org;
-		y = info[i].y_org + (topbar ? 0 : info[i].height - sh);
-		sw = info[i].width;
+		if (centered) {
+			sw = width;
+			x = info[i].x_org + ((info[i].width  - sw) / 2);
+			y = info[i].y_org + ((info[i].height - sh) / 2);
+		} else {
+			x = info[i].x_org;
+			y = info[i].y_org + (topbar ? 0 : info[i].height - sh);
+			sw = info[i].width;
+		}
 		XFree(info);
 	} else
 #endif
@@ -440,9 +446,15 @@ setup(void)
 		if (!XGetWindowAttributes(dpy, parentwin, &wa))
 			die("could not get embedding window attributes: 0x%lx",
 			    parentwin);
-		x = 0;
-		y = topbar ? 0 : wa.height - sh;
-		sw = wa.width;
+		if (centered) {
+			sw = width;
+			x = (wa.width  - sw) / 2;
+			y = (wa.height - sh) / 2;
+		} else {
+			x = 0;
+			y = topbar ? 0 : wa.height - sh;
+			sw = wa.width;
+		}
 	}
 	winx = x;
 
