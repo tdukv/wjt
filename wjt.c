@@ -506,8 +506,7 @@ static void
 usage(void)
 {
 	fputs("usage: wjt [-v] [-b] [-lv] [-le] [-m monnum] [-w winid] [-p prompt]\n"
-	      "           [-f font] [-pb color] [-pf color] [-sb color] [-sf color]\n"
-	      "           [-vb color] [-vf color] [-l lower] [-u upper] [-s step]\n"
+	      "           [-l lower] [-u upper] [-s step]\n"
 	      "           [-j jump] [-x value] [-z special]\n", stderr);
 	exit(1);
 }
@@ -593,20 +592,6 @@ main(int argc, char *argv[])
 			embed = argv[++i];
 		else if (!strcmp(argv[i], "-p")) /* adds prompt to left of slider */
 			prompt = argv[++i];
-		else if (!strcmp(argv[i], "-f")) /* font or font set */
-			fonts[0] = argv[++i];
-		else if (!strcmp(argv[i], "-pb")) /* prompt background color */
-			colors[SchemePrompt][ColBg] = argv[++i];
-		else if (!strcmp(argv[i], "-pf")) /* prompt foreground color */
-			colors[SchemePrompt][ColFg] = argv[++i];
-		else if (!strcmp(argv[i], "-sb")) /* slider background color */
-			colors[SchemeSlider][ColBg] = argv[++i];
-		else if (!strcmp(argv[i], "-sf")) /* slider foreground color */
-			colors[SchemeSlider][ColFg] = argv[++i];
-		else if (!strcmp(argv[i], "-vb")) /* value background color */
-			colors[SchemeValue][ColBg] = argv[++i];
-		else if (!strcmp(argv[i], "-vf")) /* value foreground color */
-			colors[SchemeValue][ColFg] = argv[++i];
 		else if (!strcmp(argv[i], "-l")) { /* lower bound */
 			min = valarg(argv[++i], &ok);
 			if (!ok)
