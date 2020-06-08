@@ -437,8 +437,8 @@ setup(void)
 			y = info[i].y_org + ((info[i].height - sh) / 2);
 		} else {
 			x = info[i].x_org;
-			y = info[i].y_org + (topbar ? 0 : info[i].height - sh);
-			sw = info[i].width;
+			y = info[i].y_org + (topbar ? 0 : info[i].height - sh - 2*border_width_e);
+			sw = info[i].width - 2*border_width_e;
 		}
 		XFree(info);
 	} else
@@ -453,8 +453,8 @@ setup(void)
 			y = (wa.height - sh) / 2;
 		} else {
 			x = 0;
-			y = topbar ? 0 : wa.height - sh;
-			sw = wa.width;
+			y = topbar ? 0 : wa.height - sh - 2*border_width_e;
+			sw = wa.width - 2*border_width_e;
 		}
 	}
 	winx = x;
