@@ -153,7 +153,6 @@ static void
 val2str(char * str, int val)
 {
 	if (timeformat) {
-		snprintf(str, VBUFSIZE, "%d", val);
 		int h, m, s, w=0;
 		h = val / 3600;
 		m = (val % 3600) / 60;
