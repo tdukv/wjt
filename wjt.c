@@ -150,6 +150,24 @@ grabinput(void)
 }
 
 static void
+val2str(char * str, int val)
+{
+	if (timeformat) {
+		snprintf(str, VBUFSIZE, "%d", val);
+		int h, m, s, w=0;
+		h = val / 3600;
+		m = (val % 3600) / 60;
+		s = val % 60;
+		if (h)
+			w+=snprintf(str, VBUFSIZE, "%d:", h);
+		if (h || m)
+			w+=snprintf(str+w, VBUFSIZE, "%02d:", m);
+		w+=snprintf(str+w, VBUFSIZE, "%02d", s);
+	} else {
+		snprintf(str, VBUFSIZE, "%d", val);
+	}
+}
+static void
 adjustval(int v)
 {
 	if (v < min)
@@ -159,7 +177,7 @@ adjustval(int v)
 	valx = (int)lerp(0, sw - 1 - sx, min, max, v);
 	if (v != val) {
 		val = v;
-		snprintf(valstr, VBUFSIZE, "%d", val);
+		val2str(valstr, val);
 		valw = TEXTW(valstr);
 	}
 }
@@ -497,8 +515,8 @@ setup(void)
 	drw_resize(drw, sw, sh);
 
 	adjustval(initval);
-	snprintf(minstr, VBUFSIZE, "%d", min);
-	snprintf(maxstr, VBUFSIZE, "%d", max);
+	val2str(minstr, min);
+	val2str(maxstr, max);
 	minw = TEXTW(minstr);
 	maxw = TEXTW(maxstr);
 
@@ -591,6 +609,8 @@ main(int argc, char *argv[])
 			labelval = !labelval;
 		else if (!strcmp(argv[i], "-le")) /* invert whether to display extent labels */
 			labelexts = !labelexts;
+		else if (!strcmp(argv[i], "-tf")) /* use hh:mm:ss */
+			timeformat = !timeformat;
 		else if (i + 1 == argc)
 			usage();
 		/* these options take one argument */

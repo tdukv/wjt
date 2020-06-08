@@ -2,9 +2,11 @@
 /* Default settings; can be overriden by command line. */
 
 static int topbar   = 1; /* whether bar is at top or bottom of screen */
-static int centered = 1; /* centrered by default -t/-b for top/bottom*/
+static int centered = 1; /* centrered by default -t/-b for top/bottom */
 
 static int width = 600;  /*  width when centered */
+
+static int timeformat = 0; /* use hh:mm:ss instead of a number */
 
 /* Size of the window border */
 static const unsigned int border_width_e = 1; /* at the edge of the screen */
