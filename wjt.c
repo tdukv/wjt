@@ -469,7 +469,8 @@ setup(void)
 	swa.background_pixel = scheme[SchemeSlider][ColBg].pixel;
 	swa.event_mask = ExposureMask | KeyPressMask | ButtonPressMask | ButtonReleaseMask |
 	                 Button1MotionMask | VisibilityChangeMask;
-	win = XCreateWindow(dpy, parentwin, x, y, sw, sh, border_width,
+	win = XCreateWindow(dpy, parentwin, x, y, sw, sh,
+	                    (centered ? border_width_c : border_width_e),
 	                    CopyFromParent, CopyFromParent, CopyFromParent,
 	                    CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);
 	XSetWindowBorder(dpy, win, scheme[SchemePrompt][ColBg].pixel);
@@ -579,8 +580,13 @@ main(int argc, char *argv[])
 		if (!strcmp(argv[i], "-v")) {
 			puts("wjt-"VERSION);
 			exit(0);
-		} else if (!strcmp(argv[i], "-b")) /* invert bar vertical screen location */
-			topbar = !topbar;
+		} else if (!strcmp(argv[i], "-b")) { /* bottom */
+			topbar = 0;
+			centered = 0;
+		} else if (!strcmp(argv[i], "-t")) { /* top */
+			topbar = 1;
+			centered = 0;
+		}
 		else if (!strcmp(argv[i], "-lv")) /* invert whether to display value label */
 			labelval = !labelval;
 		else if (!strcmp(argv[i], "-le")) /* invert whether to display extent labels */

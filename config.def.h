@@ -1,13 +1,14 @@
 /* See LICENSE file for copyright and license details. */
 /* Default settings; can be overriden by command line. */
 
-static int topbar           = 1;    /* -b:  whether bar is at top or bottom of screen */
-static int centered = 1;            /* centrered by default */
-                 /* TODO: Add cmd lie option for centering. */
-static int width = 600;             /*  width when centered */
+static int topbar   = 1; /* whether bar is at top or bottom of screen */
+static int centered = 1; /* centrered by default -t/-b for top/bottom*/
+
+static int width = 600;  /*  width when centered */
 
 /* Size of the window border */
-static const unsigned int border_width = 3;
+static const unsigned int border_width_e = 1; /* at the edge of the screen */
+static const unsigned int border_width_c = 3; /* at the center of the screen */
 
 static int min              = 0;    /* -l:  lower bound */
 static int max              = 100;  /* -u:  upper bound */
