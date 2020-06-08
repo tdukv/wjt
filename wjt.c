@@ -158,10 +158,12 @@ val2str(char * str, int val)
 		h = val / 3600;
 		m = (val % 3600) / 60;
 		s = val % 60;
-		if (h)
+		if (h) {
 			w+=snprintf(str, VBUFSIZE, "%d:", h);
-		if (h || m)
 			w+=snprintf(str+w, VBUFSIZE, "%02d:", m);
+		} else {
+			w+=snprintf(str+w, VBUFSIZE, "%d:", m);
+		}
 		w+=snprintf(str+w, VBUFSIZE, "%02d", s);
 	} else {
 		snprintf(str, VBUFSIZE, "%d", val);
