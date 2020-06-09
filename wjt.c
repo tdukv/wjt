@@ -154,11 +154,15 @@ val2str(char * str, int val)
 {
 	if (timeformat) {
 		int h, m, s, w=0;
+		if (val < 0) {
+			str[w++] = '-';
+			val = -val;
+		}
 		h = val / 3600;
 		m = (val % 3600) / 60;
 		s = val % 60;
 		if (h) {
-			w+=snprintf(str, VBUFSIZE, "%d:", h);
+			w+=snprintf(str+w, VBUFSIZE, "%d:", h);
 			w+=snprintf(str+w, VBUFSIZE, "%02d:", m);
 		} else {
 			w+=snprintf(str+w, VBUFSIZE, "%d:", m);
@@ -583,7 +587,10 @@ valarg(char *arg, int *ok)
 	x = strtol(arg, &p, 0);
 	while (p[0] == ':') {
 		x *= 60;
-		x += strtol(++p, &p, 0);
+		if (x < 0)
+			x -= strtol(++p, &p, 0);
+		else
+			x += strtol(++p, &p, 0);
 	}
 	if (ok) {
 		*ok = (p != arg && labs(x) <= MAXVAL);
