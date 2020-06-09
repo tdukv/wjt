@@ -581,6 +581,10 @@ valarg(char *arg, int *ok)
 	char *p;
 
 	x = strtol(arg, &p, 0);
+	while (p[0] == ':') {
+		x *= 60;
+		x += strtol(++p, &p, 0);
+	}
 	if (ok) {
 		*ok = (p != arg && labs(x) <= MAXVAL);
 	}
