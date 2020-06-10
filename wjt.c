@@ -542,40 +542,42 @@ readxresources(void) {
 	XrmInitialize();
 
 	char* xrm;
-	if ((xrm = XResourceManagerString(drw->dpy))) {
-		char *type;
-		XrmDatabase xdb = XrmGetStringDatabase(xrm);
-		XrmValue xval;
 
-		if (XrmGetResource(xdb, "wjt.font", "*", &type, &xval))
-		  fonts[0] = strdup(xval.addr);
-		else
-		  fonts[0] = strdup(fonts[0]);
-		if (XrmGetResource(xdb, "wjt.promptbg", "*", &type, &xval))
-		  colors[SchemePrompt][ColBg] = strdup(xval.addr);
-		else
-		  colors[SchemePrompt][ColBg] = strdup(colors[SchemePrompt][ColBg]);
-		if (XrmGetResource(xdb, "wjt.promptfg", "*", &type, &xval))
-		  colors[SchemePrompt][ColFg] = strdup(xval.addr);
-		else
-		  colors[SchemePrompt][ColFg] = strdup(colors[SchemePrompt][ColFg]);
-		if (XrmGetResource(xdb, "wjt.sliderbg", "*", &type, &xval))
-		  colors[SchemeSlider][ColBg] = strdup(xval.addr);
-		else
-		  colors[SchemeSlider][ColBg] = strdup(colors[SchemeSlider][ColBg]);
-		if (XrmGetResource(xdb, "wjt.sliderfg", "*", &type, &xval))
-		  colors[SchemeSlider][ColFg] = strdup(xval.addr);
-		else
-		  colors[SchemeSlider][ColFg] = strdup(colors[SchemeSlider][ColFg]);
-		if (XrmGetResource(xdb, "wjt.valuebg", "*", &type, &xval))
-		  colors[SchemeValue][ColBg] = strdup(xval.addr);
-		else
-		  colors[SchemeValue][ColBg] = strdup(colors[SchemeValue][ColBg]);
-		if (XrmGetResource(xdb, "wjt.valuefg", "*", &type, &xval))
-		  colors[SchemeValue][ColFg] = strdup(xval.addr);
-		else
-		  colors[SchemeValue][ColFg] = strdup(colors[SchemeValue][ColFg]);
-	}
+	if (!(xrm = XResourceManagerString(drw->dpy)))
+		return;
+
+	char *type;
+	XrmDatabase xdb = XrmGetStringDatabase(xrm);
+	XrmValue xval;
+
+	if (XrmGetResource(xdb, "wjt.font", "*", &type, &xval))
+	  fonts[0] = strdup(xval.addr);
+	else
+	  fonts[0] = strdup(fonts[0]);
+	if (XrmGetResource(xdb, "wjt.promptbg", "*", &type, &xval))
+		colors[SchemePrompt][ColBg] = strdup(xval.addr);
+	else
+		colors[SchemePrompt][ColBg] = strdup(colors[SchemePrompt][ColBg]);
+	if (XrmGetResource(xdb, "wjt.promptfg", "*", &type, &xval))
+		colors[SchemePrompt][ColFg] = strdup(xval.addr);
+	else
+		colors[SchemePrompt][ColFg] = strdup(colors[SchemePrompt][ColFg]);
+	if (XrmGetResource(xdb, "wjt.sliderbg", "*", &type, &xval))
+		colors[SchemeSlider][ColBg] = strdup(xval.addr);
+	else
+		colors[SchemeSlider][ColBg] = strdup(colors[SchemeSlider][ColBg]);
+	if (XrmGetResource(xdb, "wjt.sliderfg", "*", &type, &xval))
+		colors[SchemeSlider][ColFg] = strdup(xval.addr);
+	else
+		colors[SchemeSlider][ColFg] = strdup(colors[SchemeSlider][ColFg]);
+	if (XrmGetResource(xdb, "wjt.valuebg", "*", &type, &xval))
+		colors[SchemeValue][ColBg] = strdup(xval.addr);
+	else
+		colors[SchemeValue][ColBg] = strdup(colors[SchemeValue][ColBg]);
+	if (XrmGetResource(xdb, "wjt.valuefg", "*", &type, &xval))
+		colors[SchemeValue][ColFg] = strdup(xval.addr);
+	else
+		colors[SchemeValue][ColFg] = strdup(colors[SchemeValue][ColFg]);
 }
 
 static int
