@@ -1,3 +1,13 @@
+## About this fork
+
+### Features
+
+ - xrdb colors (from dmenu patch)
+ - top, bottom or centered placement (from dmenu patch)
+ - window border, dependiing on screen position
+ - option to use time format (hh:mm:ss), useful for song/video seeking
+ - min/max/init values can be set normally or as a time format
+
 ## wjt
 
 wjt is a slider widget for the X Window System that allows the user to select
