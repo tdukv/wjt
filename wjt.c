@@ -618,6 +618,9 @@ main(int argc, char *argv[])
 		} else if (!strcmp(argv[i], "-t")) { /* top */
 			topbar = 1;
 			centered = 0;
+		} else if (!strcmp(argv[i], "-c")) { /* centered */
+			topbar = 0;
+			centered = 1;
 		}
 		else if (!strcmp(argv[i], "-lv")) /* invert whether to display value label */
 			labelval = !labelval;
