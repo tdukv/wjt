@@ -531,7 +531,7 @@ setup(void)
 static void
 usage(void)
 {
-	fputs("usage: wjt [-v] [-b] [-lv] [-le] [-m monnum] [-w winid] [-p prompt]\n"
+	fputs("usage: wjt [-v] [-b] [-c ] [-lv] [-le] [-wd width] [-m monnum] [-w winid] [-p prompt]\n"
 	      "           [-l lower] [-u upper] [-s step]\n"
 	      "           [-j jump] [-x value] [-z special]\n", stderr);
 	exit(1);
@@ -628,6 +628,8 @@ main(int argc, char *argv[])
 		else if (i + 1 == argc)
 			usage();
 		/* these options take one argument */
+		else if (!strcmp(argv[i], "-wd")) /* monitor number */
+			width = atoi(argv[++i]);
 		else if (!strcmp(argv[i], "-m")) /* monitor number */
 			mon = atoi(argv[++i]);
 		else if (!strcmp(argv[i], "-w")) /* embedding window id */

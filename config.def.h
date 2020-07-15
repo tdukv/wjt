@@ -10,7 +10,7 @@
 */
 static int position = 0;
 
-static int width = 600;  /*  width when centered */
+static int width = 600;  /* Default width when centered */
 
 static int timeformat = 0; /* use hh:mm:ss instead of a number */
 
