@@ -454,13 +454,13 @@ setup(void)
 				if (INTERSECT(x, y, 1, 1, info[i]))
 					break;
 
-		if (centered) {
+		if (!position) {
 			sw = width;
 			x = info[i].x_org + ((info[i].width  - sw) / 2);
 			y = info[i].y_org + ((info[i].height - sh) / 2);
 		} else {
 			x = info[i].x_org;
-			y = info[i].y_org + (topbar ? 0 : info[i].height - sh - 2*border_width_e);
+			y = info[i].y_org + ( (position & 1) ? 0 : info[i].height - sh - 2*border_width_e);
 			sw = info[i].width - 2*border_width_e;
 		}
 		XFree(info);
@@ -470,13 +470,13 @@ setup(void)
 		if (!XGetWindowAttributes(dpy, parentwin, &wa))
 			die("could not get embedding window attributes: 0x%lx",
 			    parentwin);
-		if (centered) {
+		if (!position) {
 			sw = width;
 			x = (wa.width  - sw) / 2;
 			y = (wa.height - sh) / 2;
 		} else {
 			x = 0;
-			y = topbar ? 0 : wa.height - sh - 2*border_width_e;
+			y = (position & 1) ? 0 : wa.height - sh - 2*border_width_e;
 			sw = wa.width - 2*border_width_e;
 		}
 	}
@@ -493,7 +493,7 @@ setup(void)
 	swa.event_mask = ExposureMask | KeyPressMask | ButtonPressMask | ButtonReleaseMask |
 	                 Button1MotionMask | VisibilityChangeMask;
 	win = XCreateWindow(dpy, parentwin, x, y, sw, sh,
-	                    (centered ? border_width_c : border_width_e),
+	                    (position ? border_width_e : border_width_c),
 	                    CopyFromParent, CopyFromParent, CopyFromParent,
 	                    CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);
 	XSetWindowBorder(dpy, win, scheme[SchemePrompt][ColBg].pixel);
@@ -613,14 +613,11 @@ main(int argc, char *argv[])
 			puts("wjt-"VERSION);
 			exit(0);
 		} else if (!strcmp(argv[i], "-b")) { /* bottom */
-			topbar = 0;
-			centered = 0;
+			position = 2;
 		} else if (!strcmp(argv[i], "-t")) { /* top */
-			topbar = 1;
-			centered = 0;
+			position = 1;
 		} else if (!strcmp(argv[i], "-c")) { /* centered */
-			topbar = 0;
-			centered = 1;
+			position = 0;
 		}
 		else if (!strcmp(argv[i], "-lv")) /* invert whether to display value label */
 			labelval = !labelval;

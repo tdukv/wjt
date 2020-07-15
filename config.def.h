@@ -1,8 +1,14 @@
 /* See LICENSE file for copyright and license details. */
 /* Default settings; can be overriden by command line. */
 
-static int topbar   = 1; /* whether bar is at top or bottom of screen */
-static int centered = 1; /* centrered by default -t/-b for top/bottom */
+/*
+ * Default screen position.
+ * Overwritable by -[ctb] options.
+ * 0 - center
+ * 1 - top
+ * 2 - bottom
+*/
+static int position = 0;
 
 static int width = 600;  /*  width when centered */
 
